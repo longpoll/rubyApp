@@ -1,0 +1,32 @@
+doctype html
+html[lang="en"]
+  head
+    title
+      | ТЗ
+    meta[charset="utf-8"]
+    meta[name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+      a.navbar-brand href="/"  ТЗ
+      button.navbar-toggler aria-controls="navbarNav" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarNav" data-toggle="collapse" type="button" 
+        span.navbar-toggler-icon
+      #navbarNav.collapse.navbar-collapse
+        ul.navbar-nav
+          li.nav-item
+            a.nav-link href="/" Главная
+          li.nav-item
+            a.nav-link href="/news/"  Новости
+          li.nav-item
+          - if (current_user && current_user.isAdmin)
+             a.nav-link href="/users/update_user"  Админка
+          li.nav-item
+            - if current_user
+              = link_to_if(current_user.nil?, "Вход", sign_in_path, class: 'btn btn-danger my-2 my-sm-0') do                 
+                = link_to('Выход',  destroy_user_session_path, :method => 'delete', class: 'btn btn-danger my-2 my-sm-0') 
+            end
+    div.container
+      = yield

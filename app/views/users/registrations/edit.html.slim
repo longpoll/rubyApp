@@ -1,0 +1,19 @@
+h2 Список пользователей
+
+table.table
+  thead.thead-dark
+    tr
+      th id
+      th email
+      th Действия
+
+  tbody
+    - @u.each do |u|
+      tr
+        td = u.id
+        td = u.email
+        td 
+          - if (!u.isAdmin)
+            a href="/users/update_user/#{u.id}"Сделать админом
+          - else
+            a href="/users/update_user/#{u.id}"Убрать админа

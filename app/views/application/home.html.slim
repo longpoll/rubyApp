@@ -1,0 +1,37 @@
+- if !notice.blank?
+  div.alert.alert-primary = notice
+h1 Список новостей
+
+.card.m-2.p-2
+  .form-check
+    a href="/subscribeWeeklyNews"
+      -if current_user.feedback == 2 
+        input#defaultCheck1.form-check-input type="checkbox" value="1" checked="1"
+      -else
+        input#defaultCheck1.form-check-input type="checkbox" value="1"
+      label.form-check-label for="defaultCheck1" Подписаться на еженедельную рассылку
+
+section.m-5
+  - if !notice.blank?
+    div.alert.alert-primary = notice
+  h1 Список новостей
+  - if @news.blank?
+      h1 Новостей пока нет!
+  - if (current_user.isAdmin)
+    = link_to 'Добавить новую запись', new_news_path
+  - @news.reverse.each do |news|
+    .card.m-2
+      .card-body
+        h5.card-title 
+          a href="/news/#{news.id}" = news.title
+        p.card-text = news.content
+        -if current_user.isAdmin
+          = (news.editCount < 5 ? (link_to 'Редактировать ', edit_news_path(news)) : "")
+          = link_to 'Удалить', news, data: { confirm: 'Удалить запись?' }, method: :delete 
+        end
+
+  end
+
+
+                
+                
