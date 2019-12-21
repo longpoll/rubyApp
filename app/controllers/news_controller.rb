@@ -17,6 +17,7 @@ class NewsController < ApplicationController
   end
 
   def subscribeWeeklyNews
+
     u = User.find(current_user.id)
     userFeedback = (current_user.feedback == 1 ? 0 : 1)
     u.update!(feedback: userFeedback)
@@ -46,15 +47,17 @@ class NewsController < ApplicationController
   # POST /news
   # POST /news.json
   def create
-    @news = News.new(news_params)
+    if current_user
+      @news = News.new(news_params)
 
-    respond_to do |format|
-      if @news.save
-        format.html { redirect_to @news, notice: 'Новость успешно создана!' }
-        format.json { render :show, status: :created, location: @news }
-      else
-        format.html { render :new }
-        format.json { render json: @news.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @news.save
+          format.html { redirect_to @news, notice: 'Новость успешно создана!' }
+          format.json { render :show, status: :created, location: @news }
+        else
+          format.html { render :new }
+          format.json { render json: @news.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
