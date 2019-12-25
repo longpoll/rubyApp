@@ -8,19 +8,19 @@ section.col-8.offset-2.col-sm-6.offset-sm-3
       br
       = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control m-2'
     .field
-      = f.label :password
+      = f.label :Пароль 
       - if @minimum_password_length
         em
-          | (
+          | (минимум 
           = @minimum_password_length
-          |  characters minimum)
+          |  символов)
       br
       = f.password_field :password, autocomplete: "new-password", class: 'form-control m-2'
     .field
-      = f.label :password_confirmation
+      = f.label :Повторите_пароль
       br
       = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control m-2'
     .actions
-      = f.submit "Sign up", class: 'btn btn-primary m-2'
+      = f.submit "Регистрация", class: 'btn btn-primary m-2'
   hr
   = render "users/shared/links"

@@ -13,7 +13,6 @@ class NewsController < ApplicationController
 
   def show
     @u = User.all
-    puts UserMailer.send_simple_message
   end
 
   def subscribeWeeklyNews

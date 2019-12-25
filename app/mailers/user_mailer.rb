@@ -6,8 +6,13 @@ class UserMailer < Devise::Mailer
   require 'rest-client'
   default template_path: 'users/mailer'
 
-  def send_simple_message
-	
+  def news_digest
+  	dateDelta = (params[:everyDay]?86400:604800)
+  	@u = User.where("feedback": params[:everyDay])
+  	@n = News.where("date_create BETWEEN ? AND ?", Time.now.to_i-dateDelta, Time.now.to_i)
+  	@u.each do |user|
+		mail(to: user.email, subject: 'Новостной дайджест!')
+	end
   end
 
 end

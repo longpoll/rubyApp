@@ -12,7 +12,8 @@
 	  strong Количество редакций: 
 	  = @news.editCount
 
-=> link_to 'Редактировать', edit_news_path(@news)
+- if (current_user.isAdmin)
+	=> link_to 'Редактировать', edit_news_path(@news)
 '|
 =< link_to 'К списку новостей', news_index_path
 

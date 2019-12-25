@@ -1,5 +1,5 @@
 h2.text-center.m-5
-  | Forgot your password?
+  | Забыли пароль?
 .col-8.offset-2.col-sm-6.offset-sm-3
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
     = render "devise/shared/error_messages", resource: resource
@@ -8,6 +8,6 @@ h2.text-center.m-5
       br
       = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control m-2'
     .actions
-      = f.submit "Send me reset password instructions", class: 'btn btn-primary m-2'
+      = f.submit "Отправить инструкции", class: 'btn btn-primary m-2'
   hr
   = render "users/shared/links"
